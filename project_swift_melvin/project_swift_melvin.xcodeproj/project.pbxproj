@@ -11,6 +11,9 @@
 		BA28114C2B0B8AEE005B7E7F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA28114B2B0B8AEE005B7E7F /* ContentView.swift */; };
 		BA28114E2B0B8AF2005B7E7F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA28114D2B0B8AF2005B7E7F /* Assets.xcassets */; };
 		BA2811522B0B8AF2005B7E7F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA2811512B0B8AF2005B7E7F /* Preview Assets.xcassets */; };
+		BA5E9A052B0CAA1D00815E49 /* RecipeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5E9A042B0CAA1C00815E49 /* RecipeData.swift */; };
+		BA5E9A072B0CEA2B00815E49 /* RecipeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5E9A062B0CEA2B00815E49 /* RecipeDetailView.swift */; };
+		BA5E9A0A2B0CEB5400815E49 /* NewRecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5E9A092B0CEB5400815E49 /* NewRecipeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +23,9 @@
 		BA28114D2B0B8AF2005B7E7F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BA28114F2B0B8AF2005B7E7F /* project_swift_melvin.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = project_swift_melvin.entitlements; sourceTree = "<group>"; };
 		BA2811512B0B8AF2005B7E7F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		BA5E9A042B0CAA1C00815E49 /* RecipeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeData.swift; sourceTree = "<group>"; };
+		BA5E9A062B0CEA2B00815E49 /* RecipeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailView.swift; sourceTree = "<group>"; };
+		BA5E9A092B0CEB5400815E49 /* NewRecipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRecipeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,11 +58,14 @@
 		BA2811482B0B8AEE005B7E7F /* project_swift_melvin */ = {
 			isa = PBXGroup;
 			children = (
+				BA5E9A062B0CEA2B00815E49 /* RecipeDetailView.swift */,
 				BA2811492B0B8AEE005B7E7F /* project_swift_melvinApp.swift */,
 				BA28114B2B0B8AEE005B7E7F /* ContentView.swift */,
 				BA28114D2B0B8AF2005B7E7F /* Assets.xcassets */,
 				BA28114F2B0B8AF2005B7E7F /* project_swift_melvin.entitlements */,
 				BA2811502B0B8AF2005B7E7F /* Preview Content */,
+				BA5E9A042B0CAA1C00815E49 /* RecipeData.swift */,
+				BA5E9A092B0CEB5400815E49 /* NewRecipeView.swift */,
 			);
 			path = project_swift_melvin;
 			sourceTree = "<group>";
@@ -139,8 +148,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA5E9A052B0CAA1D00815E49 /* RecipeData.swift in Sources */,
+				BA5E9A0A2B0CEB5400815E49 /* NewRecipeView.swift in Sources */,
 				BA28114C2B0B8AEE005B7E7F /* ContentView.swift in Sources */,
 				BA28114A2B0B8AEE005B7E7F /* project_swift_melvinApp.swift in Sources */,
+				BA5E9A072B0CEA2B00815E49 /* RecipeDetailView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
