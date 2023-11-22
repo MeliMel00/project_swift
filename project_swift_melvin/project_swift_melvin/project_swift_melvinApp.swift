@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct project_swift_melvinApp: App {
+    var network = Network()
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(network)
         }
     }
 }

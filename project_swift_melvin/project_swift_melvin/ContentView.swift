@@ -2,16 +2,18 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var showingNewRecipeView = false
-    @State private var recipes = RecipeData.recipes
-
+    @State private var apiRecipes: [RecipeInfo] = []
+    @EnvironmentObject var network: Network
+    
     var body: some View {
         NavigationView {
             List {
-                ForEach(recipes) { recipe in
-                    NavigationLink(destination: RecipeDetailView(recipe: recipe, recipes: $recipes)) {
+                ForEach(network.recipes) { recipe in
+                    NavigationLink(destination: RecipeDetailView(recipe: recipe, recipes: $network.recipes)) {
                         RecipeRow(recipe: recipe)
                     }
                 }
+                
             }
             .navigationBarTitle("MyRecipeat", displayMode: .inline)
             .navigationBarItems(
@@ -22,17 +24,25 @@ struct ContentView: View {
                         Image(systemName: "plus.circle.fill")
                     }
                     .sheet(isPresented: $showingNewRecipeView) {
-                        NewRecipeView(recipes: $recipes)
+                        NewRecipeView(recipes: $network.recipes)
                     }
                 }
                     
             )
         }
-    }
+        .onAppear {
+            network.fetchRecipes(
+            )
+        }    }
 }
-
+func forTrailingZero(temp: Double) -> String {
+    let tempVar = String(format: "%g", temp)
+    return tempVar
+}
 struct RecipeRow: View {
     var recipe: Recipe
+    
+    
     
     var body: some View {
         HStack {
@@ -48,9 +58,7 @@ struct RecipeRow: View {
             VStack(alignment: .leading) {
                 Text(recipe.name)
                     .font(.headline)
-                Text("Ingrédients: \(recipe.ingredients)")
-                    .font(.subheadline)
-                Text("Durée: \(recipe.duration) minutes")
+                Text("Calories: \(forTrailingZero(temp: recipe.calories.rounded()))")
                     .font(.subheadline)
             }
         }
@@ -60,16 +68,17 @@ struct RecipeRow: View {
 
 
 
-//struct ContentView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ContentView()
-//    }
-//}
-
-struct Recipe: Identifiable, Hashable {
-    var id = UUID()
-    var name: String
-    var imageUrl: String
-    var ingredients: String
-    var duration: Int
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+            .environmentObject(Network())
+    }
 }
+
+//struct Recipe: Identifiable, Hashable {
+//    var id = UUID()
+//    var name: String
+//    var imageUrl: String
+//    var ingredients: String
+//    var duration: Int
+//}

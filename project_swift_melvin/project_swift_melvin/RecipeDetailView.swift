@@ -11,8 +11,9 @@ import SwiftUI
 struct RecipeDetailView: View {
     @State private var isEditing = false
     @State private var editedRecipe: Recipe
-
+    
     var recipe: Recipe
+    
     @Binding var recipes: [Recipe]
 
     init(recipe: Recipe, recipes: Binding<[Recipe]>) {
@@ -24,19 +25,28 @@ struct RecipeDetailView: View {
     var body: some View {
         VStack {
             if isEditing {
-                Form {
-                    Section(header: Text("Recipe Details")) {
-                        TextField("Name", text: $editedRecipe.name)
-                        TextField("Image URL", text: $editedRecipe.imageUrl)
-                        TextField("Ingredients", text: $editedRecipe.ingredients)
-                        TextField("Duration (min)", text: Binding(
-                            get: { String(editedRecipe.duration) },
-                            set: { if let newValue = Int($0) { editedRecipe.duration = newValue } }
-                        ))
-                        .keyboardType(.numberPad)
-
-                    }
+                Form() {
+                    TextField("Name", text: $editedRecipe.name)
+                    TextField("Image URL", text: $editedRecipe.imageUrl)
+                    TextField("Calories (min)", text: Binding(
+                        get: { String(editedRecipe.calories) },
+                        set: { if let newValue = Double($0) { editedRecipe.calories = newValue } }
+                    ))
                 }
+//                Form {
+//                    Section(
+//                        header: Text("Recipe Details")) {
+//                        TextField("Name", text: $editedRecipe.name)
+//                        TextField("Image URL", text: $editedRecipe.imageUrl)
+////                        TextField("Ingredients", text: $editedRecipe.ingredients)
+//                        TextField("Calories (min)", text: Binding(
+//                            get: { String(editedRecipe.duration) },
+//                            set: { if let newValue = Int($0) { editedRecipe.duration = newValue } }
+//                        ))
+//                        .keyboardType(.numberPad)
+//
+//                    }
+//                }
                 HStack {
                     Button("Save") {
                         if let index = recipes.firstIndex(where: { $0.id == editedRecipe.id }) {
@@ -64,50 +74,49 @@ struct RecipeDetailView: View {
                             .frame(height: 300)
                         }
                         .padding(.bottom, 10)
-                        
+
                         VStack(alignment: .leading, spacing: 8) {
                             Text(editedRecipe.name)
                                 .font(.title)
-                            Text("Ingredients: \(editedRecipe.ingredients)")
-                            Text("Duration: \(editedRecipe.duration) min")
+                            Text("Calories: \(forTrailingZero(temp: recipe.calories.rounded()))")
+                                .font(.subheadline)
+                            
                         }
                         Spacer()
-                        
                         VStack {
-                            Text("tuto 1 ")
-                                .padding(.vertical, 8)
-                                .font(.system(size: 20, weight: .bold))
-                            Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
-                            Text("tuto 2 ")
-                                .padding(.vertical, 8)
-                                .font(.system(size: 20, weight: .bold))
-                            Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
-                            HStack() {
-                                Button("Edit") {
-                                    isEditing.toggle()
-                                }
-                                .foregroundColor(.white)
-                                .padding(.vertical, 8)
-                                .padding(.horizontal, 16)
-                                .background(Color.blue)
-                                .cornerRadius(8)
-                                
-                                Button("Delete") {
-                                    recipes.removeAll { $0.id == editedRecipe.id }
-                                }
-                                .foregroundColor(.white)
-                                .padding(.vertical, 8)
-                                .padding(.horizontal, 16)
-                                .background(Color.red)
-                                .cornerRadius(8)
+                            Text("Ingrédients:")
+                               .font(.headline)
+                            ForEach(recipe.ingredients, id: \.self) { ingredient in
+                                       Text(ingredient)
+                                   }
+                               }
+                        HStack() {
+                            Button("Edit") {
+                                isEditing.toggle()
                             }
-                            .padding()
+                            .foregroundColor(.white)
+                            .padding(.vertical, 8)
+                            .padding(.horizontal, 16)
+                            .background(Color.blue)
+                            .cornerRadius(8)
+                            
+                            Button("Delete") {
+                                recipes.removeAll { $0.id == editedRecipe.id }
+                            }
+                            .foregroundColor(.white)
+                            .padding(.vertical, 8)
+                            .padding(.horizontal, 16)
+                            .background(Color.red)
+                            .cornerRadius(8)
                         }
+                        .padding()
                     }
                     .padding(15)
                 }
             }
         }
         .navigationBarTitle(editedRecipe.name, displayMode: .inline)
+       
+        
     }
 }
